@@ -122,8 +122,8 @@
 
             <div class="contact-form fade-in">
                 <h3>Send us a message</h3>
-                <!-- To make this form work, sign up at formspree.io and replace YOUR_FORM_ID -->
-                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <!-- n8n webhook — replace YOUR_WEBHOOK_URL after importing the workflow -->
+                <form id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
@@ -153,7 +153,9 @@
                         <label for="message">Message *</label>
                         <textarea id="message" name="message" placeholder="Describe your electrical needs..." required></textarea>
                     </div>
-                    <button type="submit" class="form-submit">Send Message</button>
+                    <button type="submit" class="form-submit" id="formBtn">Send Message</button>
+                    <p id="formSuccess" style="display:none; margin-top:16px; color:#00A2E2; font-weight:600;">&#10003; Message sent! We'll be in touch shortly.</p>
+                    <p id="formError" style="display:none; margin-top:16px; color:#c0392b; font-weight:600;">Something went wrong. Please call us on 0422 176 623.</p>
                 </form>
             </div>
         </div>
@@ -211,5 +213,47 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        const WEBHOOK_URL = 'YOUR_WEBHOOK_URL';
+
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('formBtn');
+            const success = document.getElementById('formSuccess');
+            const error = document.getElementById('formError');
+
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            success.style.display = 'none';
+            error.style.display = 'none';
+
+            const data = {
+                name:    document.getElementById('name').value,
+                phone:   document.getElementById('phone').value,
+                email:   document.getElementById('email').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value,
+            };
+
+            try {
+                const res = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+                if (res.ok) {
+                    success.style.display = 'block';
+                    this.reset();
+                } else {
+                    error.style.display = 'block';
+                }
+            } catch {
+                error.style.display = 'block';
+            }
+
+            btn.textContent = 'Send Message';
+            btn.disabled = false;
+        });
+    </script>
 </body>
 </html>
