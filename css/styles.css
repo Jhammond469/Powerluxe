@@ -204,6 +204,7 @@ ul { list-style: none; }
     min-height: 100vh;
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 .hero-bg {
     position: absolute;
