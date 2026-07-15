@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/aboutus", "destination": "/about", "permanent": true }
+    { "source": "/aboutus", "destination": "/about", "permanent": true },
+    { "source": "/home", "destination": "/", "permanent": true }
   ]
 }
