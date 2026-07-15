@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Trade — Powerluxe Pty Ltd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233A;
+    --ink-soft:#3A4658;
+    --muted:#6B7482;
+    --paper:#FCFCFA;
+    --panel:#F4F3EF;
+    --line:#E2E1DB;
+    --copper:#B06A32;
+    --copper-soft:#F0E4D8;
+    --maxw:720px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  /* Masthead */
+  header.mast{
+    padding:56px 0 30px;
+    border-bottom:2px solid var(--ink);
+    text-align:center;
+  }
+  .brand{
+    font-family:"Archivo",sans-serif;
+    font-weight:800;
+    letter-spacing:.14em;
+    font-size:clamp(20px,5.2vw,30px);
+    color:var(--ink);
+    margin:0;
+    line-height:1.15;
+  }
+  .doctype{
+    font-family:"Archivo",sans-serif;
+    font-weight:600;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    font-size:13px;
+    color:var(--copper);
+    margin:14px 0 0;
+  }
+  .credentials{
+    margin:22px auto 0;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px 10px;
+  }
+  .chip{
+    font-family:"Archivo",sans-serif;
+    font-size:12.5px;
+    font-weight:500;
+    letter-spacing:.02em;
+    color:var(--ink-soft);
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:5px 13px;
+    white-space:nowrap;
+  }
+  .chip strong{color:var(--ink);font-weight:700;}
+
+  /* Intro */
+  .intro{
+    margin:34px 0 8px;
+    font-size:17px;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+  .effective{
+    font-family:"Archivo",sans-serif;
+    font-style:normal;
+    font-size:12.5px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-top:14px;
+  }
+
+  /* Clauses */
+  main{padding:20px 0 8px;}
+  .clause{
+    padding:26px 0;
+    border-top:1px solid var(--line);
+  }
+  .clause:first-child{border-top:none;}
+  .clause h2{
+    font-family:"Archivo",sans-serif;
+    font-weight:700;
+    font-size:19px;
+    letter-spacing:-.01em;
+    margin:0 0 10px;
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    color:var(--ink);
+  }
+  .num{
+    font-family:"Archivo",sans-serif;
+    font-weight:800;
+    font-size:15px;
+    color:var(--copper);
+    min-width:26px;
+    letter-spacing:0;
+  }
+  .clause p{margin:0 0 12px;color:var(--ink-soft);}
+  .clause p:last-child{margin-bottom:0;}
+  .sub{
+    margin:10px 0 0 38px;
+    padding-left:16px;
+    border-left:2px solid var(--copper-soft);
+  }
+  .sub p{margin:0 0 10px;}
+  .highlight{color:var(--ink);font-weight:600;}
+
+  /* Acceptance note */
+  .accept{
+    margin:14px 0 0;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:24px 26px;
+  }
+  .accept h3{
+    font-family:"Archivo",sans-serif;
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink);
+    margin:0 0 10px;
+  }
+  .accept p{margin:0;font-size:16px;color:var(--ink-soft);}
+
+  /* Print button */
+  .actions{margin:34px 0 8px;text-align:center;}
+  .print-btn{
+    font-family:"Archivo",sans-serif;
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:.02em;
+    color:var(--paper);
+    background:var(--ink);
+    border:none;
+    border-radius:999px;
+    padding:13px 28px;
+    cursor:pointer;
+    transition:background .18s ease,transform .1s ease;
+  }
+  .print-btn:hover{background:#0E1826;}
+  .print-btn:active{transform:translateY(1px);}
+  .print-btn:focus-visible{outline:3px solid var(--copper);outline-offset:3px;}
+
+  /* Footer */
+  footer{
+    margin-top:20px;
+    padding:28px 0 56px;
+    border-top:2px solid var(--ink);
+    text-align:center;
+    font-family:"Archivo",sans-serif;
+  }
+  footer .co{font-weight:700;font-size:14px;letter-spacing:.05em;color:var(--ink);}
+  footer .meta{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.7;}
+
+  @media (max-width:520px){
+    body{font-size:17px;}
+    header.mast{padding:40px 0 24px;}
+    .sub{margin-left:20px;}
+    .clause h2{gap:9px;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;}
+  }
+
+  /* Print */
+  @media print{
+    :root{--paper:#fff;}
+    body{font-size:11pt;line-height:1.45;color:#000;}
+    .actions{display:none;}
+    header.mast{padding-top:0;border-color:#000;}
+    .clause{page-break-inside:avoid;border-color:#bbb;}
+    .accept{background:#fff;border-color:#999;}
+    .chip{background:#fff;}
+    a{color:#000;text-decoration:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <h1 class="brand">POWERLUXE PTY&nbsp;LTD</h1>
+    <p class="doctype">Terms of Trade</p>
+    <div class="credentials">
+      <span class="chip">ABN <strong>43&nbsp;676&nbsp;192&nbsp;484</strong></span>
+      <span class="chip">QLD Electrical Contractor Licence <strong>92262</strong></span>
+      <span class="chip">Heritage Park, Queensland</span>
+    </div>
+  </header>
+
+  <p class="intro">
+    These Terms of Trade apply to all goods and services supplied by Powerluxe Pty Ltd
+    (&ldquo;Powerluxe&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) to the client (&ldquo;you&rdquo;, &ldquo;the client&rdquo;).
+    By accepting a quote, requesting work, or accepting goods or services supplied by us, the client agrees to be bound by these terms.
+  </p>
+  <p class="effective">Effective 1 July 2026 &middot; Version 1.0</p>
+
+  <main>
+
+    <section class="clause">
+      <h2><span class="num">1</span> Payment Terms</h2>
+      <p>Payment is due within <span class="highlight">seven (7) days</span> of the invoice date unless otherwise agreed in writing. Payment may be made using any of the methods shown on the invoice. Where a deposit or progress payment is required, work may not commence or continue until that payment is received.</p>
+    </section>
+
+    <section class="clause">
+      <h2><span class="num">2</span> Overdue Accounts</h2>
+      <p>Any amount not paid by the due date is overdue. Interest may be charged on overdue amounts at a rate of <span class="highlight">ten percent (10%) per annum</span>, calculated daily from the due date until the account is paid in full. We may withhold further work, goods, or services while any account remains overdue.</p>
+    </section>
+
+    <section class="clause">
+      <h2><span class="num">3</span> Debt Collection</h2>
+      <p>If an account remains overdue, we may, without further notice, refer the debt to our appointed collection agency, <span class="highlight">Marshall Freeman Collections</span>, for recovery. Once an account is referred:</p>
+      <div class="sub">
+        <p>(a)&nbsp;&nbsp;the client agrees to pay a collection fee equal to <span class="highlight">twenty percent (20%)</span> of the outstanding amount, in addition to the invoice amount and any accrued interest, representing the commission charged by Marshall Freeman Collections in recovering the debt; and</p>
+        <p>(b)&nbsp;&nbsp;this collection fee forms part of the total debt payable by the client and is recoverable together with the outstanding invoice amount.</p>
+      </div>
+    </section>
+
+    <section class="clause">
+      <h2><span class="num">4</span> Legal Action</h2>
+      <p>If recovery efforts are unsuccessful and the matter proceeds to legal action, the client agrees to pay all legal costs incurred by Powerluxe Pty Ltd in recovering the debt, including but not limited to solicitor&rsquo;s fees, court filing fees, and any enforcement costs, on a <span class="highlight">full indemnity basis</span>.</p>
+    </section>
+
+    <section class="clause">
+      <h2><span class="num">5</span> Retention of Title</h2>
+      <p>Title to any goods or materials supplied does not pass to the client until payment has been received in full. Risk in the goods passes to the client on delivery or installation. Until title passes, the client holds the goods as bailee for Powerluxe, and we may recover or repossess the goods where payment is overdue.</p>
+    </section>
+
+    <section class="clause">
+      <h2><span class="num">6</span> Disputes</h2>
+      <p>Any dispute regarding an invoice must be raised in writing within <span class="highlight">seven (7) days</span> of the invoice date. Raising a dispute does not suspend the client&rsquo;s obligation to pay any undisputed portion of the invoice by the due date.</p>
+    </section>
+
+    <section class="clause">
+      <h2><span class="num">7</span> Acceptance</h2>
+      <p>Payment of any part of an invoice, acceptance of a quote, or acceptance of the goods or services supplied, constitutes acceptance of these Terms of Trade.</p>
+    </section>
+
+  </main>
+
+  <div class="accept">
+    <h3>How you accept these terms</h3>
+    <p>You accept these Terms of Trade when you approve a Powerluxe quote, reply to confirm by email, or accept the goods or services we supply. We recommend confirming in writing before work begins so both parties have a clear record.</p>
+  </div>
+
+  <div class="actions">
+    <button class="print-btn" onclick="window.print()">Print or save as PDF</button>
+  </div>
+
+  <footer>
+    <div class="co">POWERLUXE PTY LTD</div>
+    <div class="meta">
+      ABN 43 676 192 484 &nbsp;&middot;&nbsp; QLD Electrical Contractor Licence 92262<br>
+      Heritage Park, Queensland
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
