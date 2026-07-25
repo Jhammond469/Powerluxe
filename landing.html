@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powerluxe Electrical | Get Your Free Quote Today</title>
+    <meta name="description" content="Licensed electricians for residential and commercial jobs across South East Queensland. Get a fast, free quote from Powerluxe Electrical today.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Slim conversion nav */
+        .nav-call { padding: 10px 24px; font-size: 0.85rem; }
+
+        /* Hero grid with embedded quote form */
+        .hero .container.hero-grid { display: grid; grid-template-columns: 1.1fr 440px; gap: 60px; align-items: center; padding-top: 72px; padding-bottom: 60px; }
+        .hero-content { padding-top: 0; max-width: none; }
+        .hero-rating { display: flex; align-items: center; gap: 10px; margin-top: 24px; }
+        .hero-rating .stars { color: #FFD700; font-size: 1.1rem; letter-spacing: 2px; }
+        .hero-rating span:last-child { font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.85); }
+        .hero-form-card { background: var(--white); border-radius: 12px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); }
+        .hero-form-card h3 { font-family: var(--font-head); font-weight: 800; color: var(--navy); font-size: 1.3rem; margin-bottom: 24px; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 6px; font-family: var(--font-body); font-size: 0.9rem; color: var(--text); background: var(--white); transition: border-color 0.2s; outline: none; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--red); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-submit { width: 100%; padding: 14px; background: var(--red); color: white; border: none; border-radius: 6px; font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .form-submit:hover { background: #0088c0; }
+
+        /* Credentials checklist */
+        .credentials { padding: 80px 0; background: var(--light-bg); }
+        .checklist { max-width: 640px; margin: 48px auto 0; display: flex; flex-direction: column; gap: 16px; }
+        .checklist li { display: flex; align-items: center; gap: 16px; background: var(--white); padding: 18px 24px; border-radius: 8px; box-shadow: var(--shadow); font-weight: 500; color: var(--navy); font-size: 0.95rem; }
+        .check-icon { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; }
+
+        @media (max-width: 1024px) {
+            .hero .container.hero-grid { grid-template-columns: 1fr; }
+            .hero { min-height: auto; padding-bottom: 60px; }
+            .hero-form-card { max-width: 500px; }
+        }
+
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; }
+            .hero-form-card { padding: 32px 24px; }
+            .nav-call { padding: 8px 16px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/logo.png" alt="Powerluxe Electrical">
+            </a>
+            <a href="tel:0422176623" class="btn btn-primary nav-call">Call Now — 0422 176 623</a>
+        </div>
+    </nav>
+
+    <!-- 1. HERO (with embedded quote form) -->
+    <section class="hero" id="quote">
+        <div class="hero-bg" style="background-image: url('images/hero-pool.jpeg'); transform: rotate(-90deg) scale(2.3); transform-origin: center;"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <p class="hero-tagline">Bringing the luxury of power to you</p>
+                <h1>Expert Electrical Repairs<br>For Every Home &amp; Business</h1>
+                <div class="hero-rating">
+                    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>5-Star Rated on Google</span>
+                </div>
+            </div>
+            <div class="hero-form-card fade-in">
+                <h3>Get Your Free Quote Today</h3>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" placeholder="John Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="04XX XXX XXX" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Required</label>
+                        <select id="service" name="service">
+                            <option value="">Select a service...</option>
+                            <option value="residential">Residential Electrical</option>
+                            <option value="commercial">Commercial Electrical</option>
+                            <option value="emergency">Emergency Repairs</option>
+                            <option value="lighting">Lighting &amp; Fixtures</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" placeholder="Describe your electrical needs..." required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit" id="formBtn">Send Message</button>
+                    <p id="formSuccess" style="display:none; margin-top:16px; color:#00A2E2; font-weight:600;">&#10003; Message sent! We'll be in touch shortly.</p>
+                    <p id="formError" style="display:none; margin-top:16px; color:#c0392b; font-weight:600;">Something went wrong. Please call us on 0422 176 623.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. VALUE PROPOSITION BAND -->
+    <section class="features">
+        <div class="container features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon"><img src="images/tmpmwjnpiek.svg" alt="24/7 Support"></div>
+                <h3>24/7 Team Support</h3>
+                <p>We handle residential and commercial electrical needs, safely and efficiently.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon"><img src="images/tmpfl0mre22.svg" alt="Electrical Installations"></div>
+                <h3>Electrical Installations</h3>
+                <p>We install, upgrade, and maintain, all lighting, power and switchboards.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="56" height="56"><path d="M30 4L8 14v16c0 11.05 9.4 21.37 22 24 12.6-2.63 22-12.95 22-24V14L30 4z" stroke="white" stroke-width="3" stroke-linejoin="round"/><path d="M20 30l7 7 13-14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h3>Quality Materials</h3>
+                <p>We use industry-certified electrical components to ensure safe and long-lasting performance.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon"><img src="images/tmpwjitnx3i.svg" alt="Certified Electricians"></div>
+                <h3>Certified Electricians</h3>
+                <p>Our licensed electricians deliver reliable and compliant services with professional care.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. TESTIMONIALS SLIDER (all real Google reviews) -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>What Our<br>Customers Say</h2>
+            </div>
+            <div class="swiper testimonials-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                            <p>"Very impressed by the professionalism and quality of work done for our pool install. Jakov was excellent. Mark and Ben did a tops job. Really appreciate the extra bit of effort and care taken. Highly recommended!"</p>
+                            <span class="author">— Shan Fay, Google Review</span>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                            <p>"We had Powerluxe install our dishwasher and they were friendly, efficient, and very tidy in the manner in which they carried out their work. I would highly recommend!"</p>
+                            <span class="author">— Lottelynn Gork, Google Review</span>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                            <p>"From the outset, Jakov, Ben and Mark were professional, knowledgeable and a pleasure to engage with. They arrived exactly when they said they would, communicated clearly throughout, and demonstrated a high level of expertise and attention to detail."</p>
+                            <span class="author">— Helen Rathbone, Google Review</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. CREDENTIALS CHECKLIST -->
+    <section class="credentials">
+        <div class="container">
+            <div class="section-header fade-in" style="text-align:center;">
+                <span class="label">Why Choose Powerluxe</span>
+                <h2>Licensed, Certified<br>&amp; Ready to Help</h2>
+            </div>
+            <ul class="checklist">
+                <li class="fade-in"><span class="check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Licensed Electrical Contractor — Licence 92262</li>
+                <li class="fade-in"><span class="check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Arctic Licence L168505</li>
+                <li class="fade-in"><span class="check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>ABN 43 676 192 484 Registered</li>
+                <li class="fade-in"><span class="check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Certified &amp; Insured Electricians</li>
+                <li class="fade-in"><span class="check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Available for Emergencies 24/7</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 6. PORTFOLIO GALLERY -->
+    <section class="portfolio">
+        <div class="container">
+            <div class="swiper portfolio-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="images/finals3.jpg" alt="Powerluxe electrician loading van"></div>
+                    <div class="swiper-slide"><img src="images/finals4.jpg" alt="Electrician fitting light fixture"></div>
+                    <div class="swiper-slide"><img src="images/finals6.jpg" alt="Powerluxe branded van"></div>
+                    <div class="swiper-slide"><img src="images/finals9.jpg" alt="Powerluxe electrician with van"></div>
+                    <div class="swiper-slide"><img src="images/finals12.jpg" alt="Electrician working on exterior"></div>
+                    <div class="swiper-slide"><img src="images/finals22.jpg" alt="Powerluxe fleet vans"></div>
+                    <div class="swiper-slide"><img src="images/finals27.jpg" alt="Electrician installing wall light"></div>
+                    <div class="swiper-slide"><img src="images/69a22b3e167da463303d7aed.jpeg" alt="Completed electrical work"></div>
+                    <div class="swiper-slide"><img src="images/69a22b3e524b71a3ab7932c6.jpeg" alt="Completed electrical work"></div>
+                    <div class="swiper-slide"><img src="images/69a22b3e6e50d6ba6837fdba.jpeg" alt="Completed electrical work"></div>
+                    <div class="swiper-slide"><img src="images/69a22b3e753f15e23efde129.jpeg" alt="Completed electrical work"></div>
+                    <div class="swiper-slide"><img src="images/69a22b3e8844f52072be1c9c.jpeg" alt="Completed electrical work"></div>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. SERVICES GRID -->
+    <section class="services full-width">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="label">Our Services</span>
+                <h2>High-Quality Electrical Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon"><img src="images/tmpfp4nj7vs.svg" alt="Commercial Electrical"></div>
+                    <h3>Commercial Electrical</h3>
+                    <p>Professional electrical solutions for offices, shops and commercial spaces, delivered safely, efficiently and to full compliance standards.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon"><img src="images/tmpfl0mre22.svg" alt="Emergency Repairs"></div>
+                    <h3>Emergency Repairs</h3>
+                    <p>Fast, reliable response to urgent electrical faults to restore power and keep your property safe.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon"><img src="images/tmpl_dv5smy.svg" alt="Lighting &amp; Fixtures"></div>
+                    <h3>Lighting &amp; Fixtures</h3>
+                    <p>Installation and upgrades of indoor and outdoor lighting to improve safety, efficiency and appearance.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon"><img src="images/tmphlmccz8e.svg" alt="Residential Electrical"></div>
+                    <h3>Residential Electrical</h3>
+                    <p>Safe, compliant electrical installations and repairs for homes, from switchboards to power points, lighting and rewiring.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. STATS BAND -->
+    <section class="stats">
+        <div class="container stats-grid">
+            <div class="stat-item fade-in"><h3>115+</h3><p>Projects Completed</p></div>
+            <div class="stat-item fade-in"><h3>100%</h3><p>Certified Electricians</p></div>
+            <div class="stat-item fade-in"><h3>115+</h3><p>Satisfied Clients</p></div>
+            <div class="stat-item fade-in"><h3>100kms+</h3><p>Service Locations</p></div>
+        </div>
+    </section>
+
+    <!-- 10. ABOUT -->
+    <section class="about">
+        <div class="container about-grid">
+            <div class="about-image fade-in">
+                <img src="images/69a22b8b95735c351cce03b1.jpg" alt="Jakov - Powerluxe Electrical">
+            </div>
+            <div class="about-content fade-in">
+                <span class="label">About Powerluxe</span>
+                <h2>Locally Trusted Electrical Experts</h2>
+                <p>Powerluxe is a locally trusted electrical company delivering high-quality, reliable residential and commercial solutions with safety and professionalism.</p>
+                <p>At Powerluxe, we're committed to bringing the luxury of power to you — through premium service, attention to detail, and electrical solutions you can rely on.</p>
+                <a href="#quote" class="btn btn-primary">Get Your Free Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. FREE QUOTE REASSURANCE / DUPLICATE CONTACT -->
+    <section class="bottom-cta">
+        <div class="container bottom-cta-grid">
+            <div class="bottom-cta-left fade-in">
+                <span class="label">Complete Electrical Support</span>
+                <h2>Safe, and<br>Reliable<br>Electrical Solutions for Your<br>Property</h2>
+                <a href="#quote" class="btn btn-primary">Get Your Free Quote</a>
+            </div>
+            <div class="bottom-cta-right fade-in">
+                <p>Our licensed electricians offer safe, reliable electrical services for homes and businesses. We prioritize your safety and satisfaction with every job.</p>
+                <ul class="services-list">
+                    <li>Residential Electrical</li>
+                    <li>Lighting &amp; Fixtures</li>
+                    <li>Power</li>
+                    <li>Commercial Electrical</li>
+                    <li>Emergency Repairs</li>
+                </ul>
+                <a href="tel:0422176623" class="btn btn-outline-dark">Call Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. FINAL CTA BANNER -->
+    <section class="cta-banner">
+        <div class="container cta-inner fade-in">
+            <h2>Want Reliable Electrical Services?</h2>
+            <a href="#quote" class="btn btn-primary">Get Quote</a>
+        </div>
+    </section>
+
+    <!-- 13. FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Powerluxe Electrical" class="footer-logo">
+                </a>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook" class="social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram" class="social-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p><a href="tel:0422176623">0422 176 623</a></p>
+                <p><a href="mailto:admin@powerluxeelectrical.com">admin@powerluxeelectrical.com</a></p>
+            </div>
+            <div class="footer-col">
+                <h4>Licences</h4>
+                <p>Electrical contractor licence: 92262</p>
+                <p>Arctic Licence: L168505</p>
+                <p>ABN: 43 676 192 484</p>
+                <p><a href="terms.html" target="_blank" rel="noopener">Terms of Trade</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Power Luxe &mdash; All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Navbar solid on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 80);
+        });
+
+        // Scroll-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Portfolio slider
+        new Swiper('.portfolio-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            loop: true,
+            navigation: {
+                nextEl: '.portfolio-swiper .swiper-button-next',
+                prevEl: '.portfolio-swiper .swiper-button-prev',
+            },
+            pagination: {
+                el: '.portfolio-swiper .swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640:  { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+            },
+        });
+
+        // Testimonials slider — live Google reviews via n8n, falls back to the reviews already in the HTML
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function initTestimonialsSwiper() {
+            new Swiper('.testimonials-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 32,
+                loop: true,
+                autoplay: { delay: 5000, disableOnInteraction: false },
+                pagination: {
+                    el: '.testimonials-swiper .swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 },
+                },
+            });
+        }
+
+        const REVIEWS_WEBHOOK_URL = 'https://jhammond.app.n8n.cloud/webhook/powerluxe-reviews';
+
+        fetch(REVIEWS_WEBHOOK_URL)
+            .then(res => res.ok ? res.json() : Promise.reject())
+            .then(reviews => {
+                if (!Array.isArray(reviews) || reviews.length === 0) throw new Error('No reviews');
+                const wrapper = document.querySelector('.testimonials-swiper .swiper-wrapper');
+                wrapper.innerHTML = reviews.map(r => `
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="stars">${'&#9733;'.repeat(r.rating)}</div>
+                            <p>"${escapeHtml(r.text)}"</p>
+                            <span class="author">— ${escapeHtml(r.author)}, Google Review</span>
+                        </div>
+                    </div>
+                `).join('');
+            })
+            .catch(() => { /* keep the hardcoded reviews already in the HTML */ })
+            .finally(initTestimonialsSwiper);
+
+        // Quote form submission
+        const WEBHOOK_URL = 'https://jhammond.app.n8n.cloud/webhook/powerluxe-contact';
+        document.getElementById('contactForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('formBtn');
+            const success = document.getElementById('formSuccess');
+            const error = document.getElementById('formError');
+
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            success.style.display = 'none';
+            error.style.display = 'none';
+
+            const data = {
+                name:    document.getElementById('name').value,
+                phone:   document.getElementById('phone').value,
+                email:   document.getElementById('email').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value,
+            };
+
+            try {
+                const res = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+                if (res.ok) {
+                    success.style.display = 'block';
+                    this.reset();
+                } else {
+                    error.style.display = 'block';
+                }
+            } catch {
+                error.style.display = 'block';
+            }
+
+            btn.textContent = 'Send Message';
+            btn.disabled = false;
+        });
+    </script>
+</body>
+</html>
