@@ -588,6 +588,7 @@ ul { list-style: none; }
 @media (max-width: 1024px) {
     .features-grid { grid-template-columns: repeat(2, 1fr); }
     .services .container { grid-template-columns: 1fr; }
+    .services.full-width .services-grid { grid-template-columns: repeat(2, 1fr); }
     .suppliers .container { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -619,6 +620,7 @@ ul { list-style: none; }
     .about-image img { height: 400px; }
 
     .services-grid { grid-template-columns: 1fr; }
+    .services.full-width .services-grid { grid-template-columns: 1fr; }
 
     .cta-inner { flex-direction: column; text-align: center; }
 
