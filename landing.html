@@ -62,14 +62,12 @@
             .nav-call { padding: 8px 16px; font-size: 0.8rem; }
         }
 
-        /* Video section */
-        .video-section { padding: 80px 0; background: var(--white); }
-        .video-section .section-header { text-align: center; }
-        .video-wrapper { max-width: 800px; margin: 40px auto 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); aspect-ratio: 16 / 9; background: var(--navy); }
-        .video-wrapper video { width: 100%; height: 100%; display: block; object-fit: cover; }
+        /* Hero video (replaces the old big headline text) */
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        .hero-video-wrapper { border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.35); aspect-ratio: 16 / 9; background: var(--navy); margin-top: 4px; }
+        .hero-video-wrapper video { width: 100%; height: 100%; display: block; object-fit: cover; }
         @media (max-width: 768px) {
-            .video-section { padding: 56px 0; }
-            .video-wrapper { border-radius: 8px; margin-top: 32px; }
+            .hero-video-wrapper { border-radius: 8px; }
         }
     </style>
 </head>
@@ -90,8 +88,13 @@
         <div class="hero-overlay"></div>
         <div class="container hero-grid">
             <div class="hero-content">
+                <h1 class="sr-only">Expert Electrical Repairs For Every Home &amp; Business — Powerluxe Electrical</h1>
                 <p class="hero-tagline">Bringing the luxury of power to you</p>
-                <h1>Expert Electrical Repairs<br>For Every Home &amp; Business</h1>
+                <div class="hero-video-wrapper">
+                    <video controls playsinline preload="metadata" poster="images/landing-video-poster.jpg">
+                        <source src="images/landing-video.mp4" type="video/mp4">
+                    </video>
+                </div>
                 <div class="hero-rating">
                     <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                     <span>5-Star Rated on Google</span>
@@ -129,7 +132,7 @@
                         <label for="message">Message *</label>
                         <textarea id="message" name="message" placeholder="Describe your electrical needs..." required></textarea>
                     </div>
-                    <button type="submit" class="form-submit" id="formBtn">Send Message</button>
+                    <button type="submit" class="form-submit" id="formBtn">Submit</button>
                     <p id="formSuccess" style="display:none; margin-top:16px; color:#00A2E2; font-weight:600;">&#10003; Message sent! We'll be in touch shortly.</p>
                     <p id="formError" style="display:none; margin-top:16px; color:#c0392b; font-weight:600;">Something went wrong. Please call us on 0422 176 623.</p>
                 </form>
@@ -168,20 +171,6 @@
                     </div>
                 </div>
                 <div class="swiper-pagination"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- VIDEO -->
-    <section class="video-section">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2>See Powerluxe<br>In Action</h2>
-            </div>
-            <div class="video-wrapper fade-in">
-                <video controls playsinline preload="metadata" poster="images/landing-video-poster.jpg">
-                    <source src="images/landing-video.mp4" type="video/mp4">
-                </video>
             </div>
         </div>
     </section>
@@ -501,7 +490,7 @@
                 error.style.display = 'block';
             }
 
-            btn.textContent = 'Send Message';
+            btn.textContent = 'Submit';
             btn.disabled = false;
         });
     </script>
