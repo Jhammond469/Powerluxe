@@ -77,11 +77,15 @@ function initTestimonialsSwiper() {
 
 const testimonialsWrapper = document.querySelector('.testimonials-swiper .swiper-wrapper');
 if (testimonialsWrapper) {
-    const REVIEWS_WEBHOOK_URL = 'https://jhammond.app.n8n.cloud/webhook/powerluxe-reviews';
+    // Shared workflow: "Syntra - Google Reviews (All Clients)". The old per-client
+    // /webhook/powerluxe-reviews was never activated and served nothing.
+    const REVIEWS_WEBHOOK_URL = 'https://jhammond.app.n8n.cloud/webhook/reviews?client=powerluxe';
     fetch(REVIEWS_WEBHOOK_URL)
         .then(res => res.ok ? res.json() : Promise.reject())
-        .then(reviews => {
-            if (!Array.isArray(reviews) || reviews.length === 0) throw new Error('No reviews');
+        .then(data => {
+            // The shared endpoint wraps the list in an envelope; the old one returned a bare array.
+            const reviews = Array.isArray(data) ? data : (data && data.reviews) || [];
+            if (reviews.length === 0) throw new Error('No reviews');
             testimonialsWrapper.innerHTML = reviews.map(r => `
                 <div class="swiper-slide">
                     <div class="testimonial-card">
