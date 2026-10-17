@@ -1,0 +1,60 @@
+/* Motion scene — shared by solar.html and aircon.html (2026-10-17).
+   Sits beside the reviews (the section right after the hero); the hero video slot
+   is kept for Jakov's own video. */
+
+.motion-slot { position: relative; container-type: inline-size; background: radial-gradient(ellipse 70% 80% at 70% 55%, #1b2350 0%, var(--navy) 75%); }
+.motion-slot > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+
+/* Caption — HTML rather than SVG text so it stays readable on phones */
+.motion-caption { position: absolute; left: 4%; bottom: 7%; width: 34%; color: #d4d7e3; font-size: clamp(10.5px, 2.15cqw, 14px); line-height: 1.35; transition: opacity .4s; }
+.motion-caption b { display: block; color: var(--blue); font-family: var(--font-head); font-weight: 800; font-size: .78em; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 3px; }
+.motion-caption > span { display: block; transition: opacity .8s; }
+.motion-caption .alt { position: absolute; left: 0; right: 0; bottom: 0; opacity: 0; }
+.motion-slot.state-b .motion-caption .main { opacity: 0; }
+.motion-slot.state-b .motion-caption .alt { opacity: 1; }
+.motion-caption { opacity: 0; animation: mhFade .8s 4.2s forwards; }
+
+/* ── Logo lockup: shield pops, letters rise in turn, light sweeps across ── */
+.mh-shield { transform-box: fill-box; transform-origin: center; opacity: 0; animation: mhShield .9s .15s cubic-bezier(.2,.9,.3,1.25) forwards; }
+.mh-ltr { opacity: 0; transform: translateY(60px); animation: mhLtr .55s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(.55s + var(--i) * .07s); }
+.mh-sweep { animation: mhSweep 1.3s 1.6s ease-in-out forwards, mhSweep 1.3s 9s ease-in-out infinite; transform: translateX(-400px); }
+.mh-label { font-family: var(--font-head); font-weight: 800; fill: #fff; letter-spacing: .32em; opacity: 0; animation: mhFade .7s 1.5s forwards; }
+.mh-rule { stroke: var(--blue); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: mhDraw .9s 1.6s cubic-bezier(.6,0,.2,1) forwards; }
+
+/* ── Shared line-art scene vocabulary ── */
+.mh-line { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.mh-house { stroke: rgba(255,255,255,.72); stroke-width: 2.2; }
+.mh-cyan { stroke: var(--blue); stroke-width: 2.2; }
+.mh-faint { stroke: rgba(255,255,255,.18); stroke-width: 1.5; }
+.mh-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: mhDraw 1.5s cubic-bezier(.6,0,.2,1) forwards; }
+.d1 { animation-delay: .9s; } .d2 { animation-delay: 1.25s; } .d3 { animation-delay: 1.6s; } .d4 { animation-delay: 1.95s; }
+.mh-wire { stroke: rgba(0,162,226,.28); stroke-width: 2.2; fill: none; }
+.mh-current { stroke: var(--blue); stroke-width: 3.2; fill: none; stroke-linecap: round; stroke-dasharray: .035 .09; opacity: 0; filter: drop-shadow(0 0 4px rgba(0,162,226,.9)); animation: mhFade .4s 3.6s forwards, mhFlow 1.2s 3.6s linear infinite; }
+.mh-sun { opacity: 0; transform: translateY(70px); transform-box: fill-box; animation: mhRise 1.6s 1.6s cubic-bezier(.2,.7,.2,1) forwards; }
+.mh-sun .core { fill: #ffd27a; }
+.mh-rays { transform-box: fill-box; transform-origin: center; animation: mhSpin 40s linear infinite; }
+.mh-rays line { stroke: #ffd27a; stroke-width: 2.4; stroke-linecap: round; opacity: .75; }
+.mh-pool-water { fill: rgba(0,162,226,.18); transition: fill 1.6s 1s; }
+.mh-ripple { stroke: rgba(210,245,255,.8); stroke-width: 1.6; fill: none; stroke-linecap: round; opacity: 0; animation: mhFade 1s 3.4s forwards, mhWave 3.2s ease-in-out infinite; }
+.mh-ripple.r2 { animation-delay: 3.4s, 1.6s; }
+
+/* Pause everything while the hero is off screen (saves battery on phones) */
+.motion-slot.offscreen * { animation-play-state: paused !important; }
+
+@keyframes mhShield { 0% { opacity: 0; transform: scale(.4) rotate(-12deg); } 100% { opacity: 1; transform: none; } }
+@keyframes mhLtr { to { opacity: 1; transform: none; } }
+@keyframes mhSweep { 0% { transform: translateX(-400px); } 100% { transform: translateX(1300px); } }
+@keyframes mhFade { to { opacity: 1; } }
+@keyframes mhDraw { to { stroke-dashoffset: 0; } }
+@keyframes mhRise { to { opacity: 1; transform: none; } }
+@keyframes mhSpin { to { transform: rotate(360deg); } }
+@keyframes mhFlow { to { stroke-dashoffset: -.16; } }
+@keyframes mhWave { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(9px); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .motion-slot * { animation: none !important; transition: none !important; }
+    .mh-shield, .mh-ltr, .mh-label, .motion-caption, .mh-sun, .mh-current, .mh-ripple { opacity: 1; transform: none; }
+    .mh-draw, .mh-rule { stroke-dashoffset: 0; }
+    .mh-sweep { display: none; }
+}
