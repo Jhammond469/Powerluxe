@@ -97,6 +97,13 @@
         .video-pending { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; border: 1px dashed rgba(255,255,255,.25); background: rgba(20,20,34,.7); }
         .video-pending img { width: 44%; height: auto; opacity: .9; }
         .video-pending span { color: rgba(255,255,255,.6); font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; }
+        /* Before / after slides in the photo slider */
+        .portfolio-swiper .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; height: 420px; }
+        .portfolio-swiper .ba figure { position: relative; margin: 0; min-width: 0; }
+        .portfolio-swiper .ba img { height: 420px; }
+        .portfolio-swiper .ba figcaption { position: absolute; left: 10px; top: 10px; padding: 4px 10px; border-radius: 4px; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: rgba(0,0,0,.65); color: #fff; }
+        .portfolio-swiper .ba figure:last-child figcaption { background: var(--blue); }
+        @media (max-width: 768px) { .portfolio-swiper .ba, .portfolio-swiper .ba img { height: 280px; } }
         /* Inline service icons (the base set has no solar/aircon icons) */
         .service-icon svg { width: 56px; height: 56px; color: var(--blue); }
         .feature-icon svg { color: #fff; }
@@ -162,11 +169,10 @@
             <div class="hero-content">
                 <p class="hero-tagline">Bringing the luxury of power to you</p>
                 <h1>Air Conditioning, Installed by Licensed Electricians</h1>
-                <!-- Jakov's aircon video goes here. When it arrives: compress to 720p (see CLAUDE.md),
-                     save as images/aircon-video.mp4, set VIDEO_SRC (+ VIDEO_POSTER) in tools/build-service-pages.py, re-run. -->
-                <div class="hero-video-wrapper video-pending">
-                    <img src="images/logo-nav.png" alt="" width="1056" height="216">
-                    <span>Video coming soon</span>
+                <div class="hero-video-wrapper">
+                    <video controls playsinline preload="metadata" poster="images/aircon-video-poster.jpg">
+                        <source src="images/aircon-video.mp4" type="video/mp4">
+                    </video>
                 </div>
                 <div class="hero-rating">
                     <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
@@ -353,18 +359,14 @@
         <div class="container">
             <div class="swiper portfolio-swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="images/finals3.jpg" alt="Powerluxe electrician loading van" loading="lazy" decoding="async"></div>
-                    <div class="swiper-slide"><img src="images/finals4.jpg" alt="Electrician fitting light fixture" loading="lazy" decoding="async"></div>
-                    <div class="swiper-slide"><img src="images/finals6.jpg" alt="Powerluxe branded van" loading="lazy" decoding="async"></div>
-                    <div class="swiper-slide"><img src="images/finals9.jpg" alt="Powerluxe electrician with van" loading="lazy" decoding="async"></div>
-                    <div class="swiper-slide"><img src="images/finals12.jpg" alt="Electrician working on exterior" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/aircon-install-4.jpg" alt="Split system installed in a living room" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/aircon-install-1.jpg" alt="Outdoor unit installed on a brick wall" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><div class="ba" role="img" aria-label="Old indoor unit replaced with a new split system, before and after"><figure><img src="images/aircon-before-indoor.jpg" alt="Before" loading="lazy" decoding="async"><figcaption>Before</figcaption></figure><figure><img src="images/aircon-after-indoor.jpg" alt="After" loading="lazy" decoding="async"><figcaption>After</figcaption></figure></div></div>
+                    <div class="swiper-slide"><img src="images/aircon-install-2.jpg" alt="Outdoor unit with neat pipe cover" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><div class="ba" role="img" aria-label="Old outdoor unit replaced with a new one, before and after"><figure><img src="images/aircon-before-outdoor.jpg" alt="Before" loading="lazy" decoding="async"><figcaption>Before</figcaption></figure><figure><img src="images/aircon-after-outdoor.jpg" alt="After" loading="lazy" decoding="async"><figcaption>After</figcaption></figure></div></div>
+                    <div class="swiper-slide"><img src="images/aircon-install-3.jpg" alt="Outdoor unit installed in a corner" loading="lazy" decoding="async"></div>
                     <div class="swiper-slide"><img src="images/finals22.jpg" alt="Powerluxe fleet vans" loading="lazy" decoding="async"></div>
-                    <div class="swiper-slide"><img src="images/finals27.jpg" alt="Electrician installing wall light" loading="lazy" decoding="async"></div>
-                    <div class="swiper-slide"><img src="images/69a22b3e167da463303d7aed.jpeg" alt="Completed electrical work" loading="lazy" decoding="async"></div>
-                    <div class="swiper-slide"><img src="images/69a22b3e524b71a3ab7932c6.jpeg" alt="Completed electrical work" loading="lazy" decoding="async"></div>
-                    <div class="swiper-slide"><img src="images/69a22b3e6e50d6ba6837fdba.jpeg" alt="Completed electrical work" loading="lazy" decoding="async"></div>
-                    <div class="swiper-slide"><img src="images/69a22b3e753f15e23efde129.jpeg" alt="Completed electrical work" loading="lazy" decoding="async"></div>
-                    <div class="swiper-slide"><img src="images/69a22b3e8844f52072be1c9c.jpeg" alt="Completed electrical work" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/finals9.jpg" alt="Powerluxe electrician with van" loading="lazy" decoding="async"></div>
                 </div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>

@@ -380,6 +380,13 @@ EXTRA_CSS = '''
         .video-pending { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; border: 1px dashed rgba(255,255,255,.25); background: rgba(20,20,34,.7); }
         .video-pending img { width: 44%; height: auto; opacity: .9; }
         .video-pending span { color: rgba(255,255,255,.6); font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; }
+        /* Before / after slides in the photo slider */
+        .portfolio-swiper .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; height: 420px; }
+        .portfolio-swiper .ba figure { position: relative; margin: 0; min-width: 0; }
+        .portfolio-swiper .ba img { height: 420px; }
+        .portfolio-swiper .ba figcaption { position: absolute; left: 10px; top: 10px; padding: 4px 10px; border-radius: 4px; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: rgba(0,0,0,.65); color: #fff; }
+        .portfolio-swiper .ba figure:last-child figcaption { background: var(--blue); }
+        @media (max-width: 768px) { .portfolio-swiper .ba, .portfolio-swiper .ba img { height: 280px; } }
         /* Inline service icons (the base set has no solar/aircon icons) */
         .service-icon svg { width: 56px; height: 56px; color: var(--blue); }
         .feature-icon svg { color: #fff; }'''
@@ -422,7 +429,7 @@ PAGES = [
         banner='Ready to Switch to Solar?',
     ),
     dict(
-        slug='aircon', file='aircon.html', video='images/aircon-video.mp4', VIDEO_SRC='', VIDEO_POSTER='',
+        slug='aircon', file='aircon.html', video='images/aircon-video.mp4', VIDEO_SRC='images/aircon-video.mp4', VIDEO_POSTER='images/aircon-video-poster.jpg',
         title='Powerluxe Electrical | Air Conditioning Installation — Get Your Free Quote',
         desc='Split system air conditioning installed by licensed electricians with an ARCtick refrigerant licence (L168505) across South East Queensland. Get a fast, free aircon quote from Powerluxe Electrical.',
         h1='Air Conditioning, Installed by Licensed Electricians',
@@ -455,6 +462,16 @@ PAGES = [
         bottom_p='Our licensed electricians install air conditioning that suits your home and your budget, with the electrical work done properly by the same team.',
         bottom_list=['Split System Installation', 'Dedicated Aircon Circuits', 'Switchboard Upgrades', 'Replacements &amp; Upgrades', 'Servicing &amp; Repairs'],
         banner='Ready for Year-Round Comfort?',
+        portfolio=[
+            ('images/aircon-install-4.jpg', 'Split system installed in a living room'),
+            ('images/aircon-install-1.jpg', 'Outdoor unit installed on a brick wall'),
+            ('ba', 'images/aircon-before-indoor.jpg', 'images/aircon-after-indoor.jpg', 'Old indoor unit replaced with a new split system'),
+            ('images/aircon-install-2.jpg', 'Outdoor unit with neat pipe cover'),
+            ('ba', 'images/aircon-before-outdoor.jpg', 'images/aircon-after-outdoor.jpg', 'Old outdoor unit replaced with a new one'),
+            ('images/aircon-install-3.jpg', 'Outdoor unit installed in a corner'),
+            ('images/finals22.jpg', 'Powerluxe fleet vans'),
+            ('images/finals9.jpg', 'Powerluxe electrician with van'),
+        ],
     ),
     dict(
         slug='smoke', file='smoke-alarms.html', video='images/smoke-alarms-video.mp4', VIDEO_SRC='', VIDEO_POSTER='',
@@ -554,6 +571,16 @@ def build(p):
     h = sub_once(r'(<div class="bottom-cta-right fade-in">\s*)<p>.*?</p>\s*<ul class="services-list">.*?</ul>',
                  '<div class="bottom-cta-right fade-in">\n                <p>' + p['bottom_p'] + '</p>\n                <ul class="services-list">'
                  + ''.join(f'\n                    <li>{x}</li>' for x in p['bottom_list']) + '\n                </ul>', h)
+    if p.get('portfolio'):
+        def slide(x):
+            if x[0] == 'ba':
+                return (f'\n                    <div class="swiper-slide"><div class="ba" role="img" aria-label="{x[3]}, before and after">'
+                        f'<figure><img src="{x[1]}" alt="Before" loading="lazy" decoding="async"><figcaption>Before</figcaption></figure>'
+                        f'<figure><img src="{x[2]}" alt="After" loading="lazy" decoding="async"><figcaption>After</figcaption></figure></div></div>')
+            return f'\n                    <div class="swiper-slide"><img src="{x[0]}" alt="{x[1]}" loading="lazy" decoding="async"></div>'
+        h = sub_once(r'(<div class="swiper portfolio-swiper">\s*<div class="swiper-wrapper">).*?(\n                </div>\s*<div class="swiper-button-prev">)',
+                     '<div class="swiper portfolio-swiper">\n                <div class="swiper-wrapper">' + ''.join(slide(x) for x in p['portfolio'])
+                     + '\n                </div>\n                <div class="swiper-button-prev">', h)
     h = sub_once(r'<h2>Want Reliable Electrical Services\?</h2>', f'<h2>{p["banner"]}</h2>', h)
 
     h = sub_once(r'(<script src="https://link.msgsndr.com/js/form_embed.js"></script>)',
