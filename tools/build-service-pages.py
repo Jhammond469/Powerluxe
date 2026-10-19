@@ -10,7 +10,7 @@ swaps only the service-specific blocks. Re-run it after any change to landing.ht
 import re
 from pathlib import Path
 
-PREVIEW = True  # noindex until launch
+PREVIEW = False  # launched 2026-10-19 (True = noindex)
 ROOT = Path(__file__).resolve().parent.parent
 BASE = (ROOT / 'landing.html').read_text()
 
