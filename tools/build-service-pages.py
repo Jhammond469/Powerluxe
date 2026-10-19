@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build solar.html and aircon.html from landing.html (2026-10-17).
+"""Build solar.html, aircon.html and smoke-alarms.html from landing.html (2026-10-17; smoke alarms 2026-10-19).
 
 The service pages must keep exactly the format of Jakov's /landing page (the marketing
 course's structure), so instead of hand-copying it, this script takes landing.html and
@@ -31,6 +31,7 @@ ICONS = {
     'tools': icon('<path d="M38 8a10 10 0 0 0-9 14L10 41a4.2 4.2 0 0 0 6 6l19-19a10 10 0 0 0 14-9l-6 3-5-5 3-6z"/>'),
     'thermo': icon('<path d="M26 34V12a5 5 0 0 1 10 0v22a9 9 0 1 1-10 0z"/><path d="M31 22v18"/>'),
     'home': icon('<path d="M8 28L30 10l22 18"/><path d="M14 24v26h32V24"/><path d="M25 50V36h10v14"/>'),
+    'alarm': icon('<circle cx="30" cy="30" r="13"/><circle cx="30" cy="30" r="3"/><path d="M13 15a24 24 0 0 0 0 30M47 15a24 24 0 0 1 0 30"/>'),
     'map': icon('<path d="M30 52s16-14.5 16-27a16 16 0 0 0-32 0c0 12.5 16 27 16 27z"/><circle cx="30" cy="25" r="6"/>'),
 }
 
@@ -297,6 +298,71 @@ AIRCON_CSS = '''
             .a-room { fill: rgba(127,214,255,.2); } .a-led { fill: #7fd6ff; }
         }'''
 
+# ── SMOKE ALARM scene — same house; state A = smoke in one room sets off every alarm, B = all clear ──
+SMOKE_SCENE = '''<g transform="translate(272 44) scale(.82)">
+                          <line class="mh-line mh-faint mh-draw d1" pathLength="1" x1="90" y1="440" x2="620" y2="440"/>
+                          <polyline class="mh-line mh-house mh-draw d1" pathLength="1" points="200,440 200,280 530,280 530,440"/>
+                          <polyline class="mh-line mh-house mh-draw d2" pathLength="1" points="176,288 365,170 554,288"/>
+                          <!-- three rooms: bedroom, hallway, bedroom -->
+                          <rect class="k-room" style="--d:4.6s" x="202" y="282" width="106" height="157"/>
+                          <rect class="k-room" style="--d:5.2s" x="312" y="282" width="106" height="157"/>
+                          <rect class="k-room" style="--d:5.4s" x="422" y="282" width="106" height="157"/>
+                          <line class="mh-line mh-house mh-draw d3" pathLength="1" x1="310" y1="282" x2="310" y2="440"/>
+                          <line class="mh-line mh-house mh-draw d3" pathLength="1" x1="420" y1="282" x2="420" y2="440"/>
+                          <rect class="mh-line mh-house mh-draw d3" pathLength="1" x="216" y="404" width="78" height="24" rx="4"/>
+                          <rect class="mh-line mh-house mh-draw d3" pathLength="1" x="436" y="404" width="78" height="24" rx="4"/>
+                          <rect class="mh-line mh-house mh-draw d3" pathLength="1" x="340" y="364" width="50" height="76" rx="3"/>
+                          <!-- smoke rising in the first bedroom -->
+                          <g class="k-smoke">
+                            <path d="M244 400 q-10 -18 0 -36 t0 -36"/><path d="M262 404 q-10 -18 0 -36 t0 -36"/><path d="M280 400 q-10 -18 0 -36 t0 -36"/>
+                          </g>
+                          <!-- interconnect: one alarm trips, the signal runs along the ceiling to the rest -->
+                          <path class="mh-wire" d="M255 288 H475"/>
+                          <g class="k-linkwrap"><path class="mh-current k-link" pathLength="1" d="M255 288 H475"/></g>
+                          <g class="k-alarm" style="--d:4.6s"><g class="k-rings"><circle class="k-ring" cx="255" cy="297" r="10"/><circle class="k-ring r2" cx="255" cy="297" r="10"/></g><circle class="k-body" cx="255" cy="297" r="9"/><circle class="k-led" cx="255" cy="297" r="2.8"/></g>
+                          <g class="k-alarm" style="--d:5.2s"><g class="k-rings"><circle class="k-ring" cx="365" cy="297" r="10"/><circle class="k-ring r2" cx="365" cy="297" r="10"/></g><circle class="k-body" cx="365" cy="297" r="9"/><circle class="k-led" cx="365" cy="297" r="2.8"/></g>
+                          <g class="k-alarm" style="--d:5.4s"><g class="k-rings"><circle class="k-ring" cx="475" cy="297" r="10"/><circle class="k-ring r2" cx="475" cy="297" r="10"/></g><circle class="k-body" cx="475" cy="297" r="9"/><circle class="k-led" cx="475" cy="297" r="2.8"/></g>
+                          <svg x="592" y="392" width="30" height="30" viewBox="0 0 216 216" class="k-shield"><image href="images/logo-nav.png" width="1056" height="216"/></svg>
+                          <text class="k-badge" x="622" y="214" text-anchor="end"><tspan class="alarm">ALL 3 SOUND</tspan><tspan class="ok" x="622">ALL CLEAR ✓</tspan></text>
+                          <text class="k-sub" x="622" y="240" text-anchor="end"><tspan class="alarm">one detects, all alert</tspan><tspan class="ok" x="622">QLD compliant</tspan></text>
+                        </g>'''
+
+SMOKE_CSS = '''
+        /* Smoke alarm scene — state A = smoke trips every alarm, state B (.state-b) = all clear */
+        .smoke-slot { --k-alert: #ff5252; --k-ok: #3ce0a0; }
+        .k-room { fill: rgba(255,82,82,0); animation: kRoom 1s var(--d) forwards; transition: fill 1.2s; }
+        .smoke-slot.cycling .k-room { animation: none; fill: rgba(255,82,82,.13); }
+        .smoke-slot.state-b .k-room { fill: rgba(60,224,160,0); }
+        .k-smoke { transition: opacity 1.2s; } .smoke-slot.state-b .k-smoke { opacity: 0; }
+        .k-smoke path { fill: none; stroke: rgba(205,210,225,.55); stroke-width: 7; stroke-linecap: round; filter: blur(2px); opacity: 0; animation: kSmoke 3s 3.4s ease-in infinite; }
+        .k-smoke path:nth-child(2) { animation-delay: 4.1s; } .k-smoke path:nth-child(3) { animation-delay: 4.8s; }
+        .k-body { fill: #1e2747; stroke: rgba(255,255,255,.85); stroke-width: 2; opacity: 0; animation: mhFade .5s 2.6s forwards; }
+        .k-led { fill: var(--k-ok); opacity: 0; animation: mhFade .3s 3s forwards, kAlert .1s var(--d) forwards, kBlink .6s var(--d) infinite; }
+        .smoke-slot.cycling .k-led { animation: kBlink .6s infinite; fill: var(--k-alert); opacity: 1; }
+        .smoke-slot.state-b .k-led { animation: none; fill: var(--k-ok); }
+        .k-rings { transition: opacity .8s; } .smoke-slot.state-b .k-rings { opacity: 0; }
+        .k-ring { fill: none; stroke: var(--k-alert); stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; animation: kRing 1.4s var(--d) ease-out infinite; }
+        .k-ring.r2 { animation-delay: calc(var(--d) + .7s); }
+        .k-link { stroke: var(--k-alert); filter: drop-shadow(0 0 4px rgba(255,82,82,.9)); animation: mhFade .4s 4.9s forwards, mhFlow 1.2s 4.9s linear infinite; }
+        .k-linkwrap { transition: opacity 1s; } .smoke-slot.state-b .k-linkwrap { opacity: 0; }
+        .k-shield { opacity: 0; animation: mhFade .6s 3.2s forwards; }
+        .k-badge { font-family: var(--font-head); font-weight: 800; font-size: 22px; opacity: 0; animation: mhFade .8s 5.8s forwards; }
+        .k-sub { font-size: 14px; fill: rgba(255,255,255,.7); opacity: 0; animation: mhFade .8s 6.1s forwards; }
+        .k-badge tspan, .k-sub tspan { transition: opacity .8s; }
+        .k-badge .alarm { fill: var(--k-alert); } .k-badge .ok { fill: var(--k-ok); }
+        .k-badge .ok, .k-sub .ok { opacity: 0; }
+        .smoke-slot.state-b .k-badge .alarm, .smoke-slot.state-b .k-sub .alarm { opacity: 0; }
+        .smoke-slot.state-b .k-badge .ok, .smoke-slot.state-b .k-sub .ok { opacity: 1; }
+        @keyframes kRoom { to { fill: rgba(255,82,82,.13); } }
+        @keyframes kAlert { to { fill: var(--k-alert); } }
+        @keyframes kBlink { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+        @keyframes kRing { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(3.4); opacity: 0; } }
+        @keyframes kSmoke { 0% { transform: translateY(10px); opacity: 0; } 30% { opacity: .8; } 100% { transform: translateY(-46px); opacity: 0; } }
+        @media (prefers-reduced-motion: reduce) {
+            .k-body, .k-led, .k-shield, .k-badge, .k-sub { opacity: 1; }
+            .k-smoke path, .k-ring { animation: none; opacity: 0; }
+        }'''
+
 # Shared page-level CSS (inline icons in the existing icon slots)
 EXTRA_CSS = '''
         /* Reviews: motion scene beside a one-at-a-time review slider */
@@ -389,6 +455,41 @@ PAGES = [
         bottom_p='Our licensed electricians install air conditioning that suits your home and your budget, with the electrical work done properly by the same team.',
         bottom_list=['Split System Installation', 'Dedicated Aircon Circuits', 'Switchboard Upgrades', 'Replacements &amp; Upgrades', 'Servicing &amp; Repairs'],
         banner='Ready for Year-Round Comfort?',
+    ),
+    dict(
+        slug='smoke', file='smoke-alarms.html', video='images/smoke-alarms-video.mp4', VIDEO_SRC='', VIDEO_POSTER='',
+        title='Powerluxe Electrical | Smoke Alarm Installation — QLD Compliant, Free Quote',
+        desc='Photoelectric, interconnected smoke alarms installed by licensed electricians across South East Queensland. Get your home ready for the 1 January 2027 deadline with a free quote from Powerluxe Electrical.',
+        h1='Smoke Alarms, Installed to Queensland\'s New Standard',
+        label='SMOKE ALARMS',
+        aria='Animated Powerluxe logo, then smoke in one bedroom setting off an interconnected smoke alarm that sounds every alarm in the house',
+        scene=SMOKE_SCENE, css=SMOKE_CSS,
+        cap_main='<b>Smoke in one room</b>Every alarm in the house sounds together.',
+        cap_alt='<b>All clear</b>Photoelectric, interconnected, QLD compliant.',
+        form_h3='Get Your Free Smoke Alarm Quote',
+        features=[
+            ('alarm', 'QLD Compliant Alarms', 'Photoelectric, interconnected alarms that meet Queensland\'s smoke alarm laws.'),
+            ('board', 'Hardwired by Electricians', 'Licensed electricians wire your alarms in properly, so when one sounds, they all sound.'),
+            ('shield', 'Safe, Compliant Installs', 'Every alarm installed, tested and signed off to Australian standards.'),
+            ('map', 'Local SEQ Team', 'A local business servicing 100kms+ across South East Queensland.'),
+        ],
+        checklist=['Licensed Electrical Contractor — Licence 92262', 'Photoelectric Alarms to AS 3786', 'Interconnected Across the Whole Home',
+                   'ABN 43 676 192 484 Registered', 'Certified &amp; Insured Electricians', 'Clean, Tidy &amp; On-Time Installs'],
+        services_label='Smoke Alarm Services', services_h2='Complete Smoke Alarm Solutions',
+        services=[
+            ('alarm', 'Smoke Alarm Installation', 'Photoelectric alarms in every bedroom, in hallways and on every level, as Queensland law requires.'),
+            ('home', 'Whole-Home Upgrades', 'Replace old ionisation alarms and bring your home up to the 2027 standard in one visit.'),
+            ('tools', 'Rental &amp; Sale Compliance', 'Alarms installed for landlords, property managers and homes going to market.'),
+            ('board', 'Hardwired &amp; Interconnected', 'Wired into your power with battery back-up, so every alarm in the house sounds together.'),
+        ],
+        about_h2='Locally Trusted Smoke Alarm &amp; Electrical Experts',
+        about_p=['Powerluxe is a locally trusted electrical company. Our licensed electricians install and wire your smoke alarms properly, so your home is compliant and your family is protected.',
+                 "At Powerluxe, we're committed to bringing the luxury of power to you — through premium service, attention to detail, and safety you can rely on."],
+        bottom_label='Complete Smoke Alarm Support',
+        bottom_h2='Be Ready<br>for<br>Queensland\'s 2027<br>Deadline',
+        bottom_p='From 1 January 2027, every Queensland home needs photoelectric, interconnected smoke alarms in every bedroom, in hallways and on every level. Our licensed electricians get you there in one visit.',
+        bottom_list=['Smoke Alarm Installation', 'Ionisation Alarm Replacement', 'Hardwired &amp; Interconnected Alarms', 'Rental &amp; Sale Compliance', 'Alarm Testing &amp; Checks'],
+        banner='Is Your Home Ready for 2027?',
     ),
 ]
 
