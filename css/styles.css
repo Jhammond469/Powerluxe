@@ -387,6 +387,27 @@ ul { list-style: none; }
     object-fit: cover;
     border-radius: 6px;
 }
+/* Per-photo crop focus (x y) so the actual work stays in frame at every slide size */
+.portfolio-swiper img[src$="finals3.jpg"] { object-position: 22% 50%; }
+.portfolio-swiper img[src$="finals4.jpg"] { object-position: 55% 45%; }
+.portfolio-swiper img[src$="finals6.jpg"] { object-position: 50% 65%; }
+.portfolio-swiper img[src$="finals9.jpg"] { object-position: 60% 65%; }
+.portfolio-swiper img[src$="finals12.jpg"] { object-position: 55% 40%; }
+.portfolio-swiper img[src$="finals22.jpg"] { object-position: 58% 60%; }
+.portfolio-swiper img[src$="finals27.jpg"] { object-position: 50% 35%; }
+.portfolio-swiper img[src$="69a22b3e167da463303d7aed.jpeg"] { object-position: 50% 30%; }
+.portfolio-swiper img[src$="69a22b3e524b71a3ab7932c6.jpeg"] { object-position: 50% 45%; }
+.portfolio-swiper img[src$="69a22b3e6e50d6ba6837fdba.jpeg"] { object-position: 35% 45%; }
+.portfolio-swiper img[src$="69a22b3e753f15e23efde129.jpeg"] { object-position: 50% 40%; }
+.portfolio-swiper img[src$="69a22b3e8844f52072be1c9c.jpeg"] { object-position: 62% 55%; }
+.portfolio-swiper img[src$="aircon-install-4.jpg"] { object-position: 50% 12%; }
+.portfolio-swiper img[src$="aircon-install-1.jpg"] { object-position: 50% 72%; }
+.portfolio-swiper img[src$="aircon-before-indoor.jpg"] { object-position: 54% 40%; }
+.portfolio-swiper img[src$="aircon-after-indoor.jpg"] { object-position: 45% 20%; }
+.portfolio-swiper img[src$="aircon-install-2.jpg"] { object-position: 65% 75%; }
+.portfolio-swiper img[src$="aircon-before-outdoor.jpg"] { object-position: 50% 55%; }
+.portfolio-swiper img[src$="aircon-after-outdoor.jpg"] { object-position: 38% 45%; }
+.portfolio-swiper img[src$="aircon-install-3.jpg"] { object-position: 55% 72%; }
 .portfolio-swiper .swiper-button-prev,
 .portfolio-swiper .swiper-button-next {
     color: var(--red);

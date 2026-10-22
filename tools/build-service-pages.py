@@ -381,12 +381,12 @@ EXTRA_CSS = '''
         .video-pending img { width: 44%; height: auto; opacity: .9; }
         .video-pending span { color: rgba(255,255,255,.6); font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; }
         /* Before / after slides in the photo slider */
-        .portfolio-swiper .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; height: 420px; }
-        .portfolio-swiper .ba figure { position: relative; margin: 0; min-width: 0; }
-        .portfolio-swiper .ba img { height: 420px; }
+        .portfolio-swiper .ba { display: grid; grid-template-rows: 1fr 1fr; gap: 8px; height: 420px; }
+        .portfolio-swiper .ba figure { position: relative; margin: 0; min-height: 0; }
+        .portfolio-swiper .ba img { height: 206px; }
         .portfolio-swiper .ba figcaption { position: absolute; left: 10px; top: 10px; padding: 4px 10px; border-radius: 4px; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: rgba(0,0,0,.65); color: #fff; }
         .portfolio-swiper .ba figure:last-child figcaption { background: var(--blue); }
-        @media (max-width: 768px) { .portfolio-swiper .ba, .portfolio-swiper .ba img { height: 280px; } }
+        @media (max-width: 480px) { .portfolio-swiper .ba { height: 280px; } .portfolio-swiper .ba img { height: 136px; } }
         /* Inline service icons (the base set has no solar/aircon icons) */
         .service-icon svg { width: 56px; height: 56px; color: var(--blue); }
         .feature-icon svg { color: #fff; }'''
