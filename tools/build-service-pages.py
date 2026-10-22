@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Build solar.html, aircon.html and smoke-alarms.html from landing.html (2026-10-17; smoke alarms 2026-10-19).
+"""Build landing.html, solar.html, aircon.html and smoke-alarms.html from tools/landing-base.html
+(2026-10-17; smoke alarms 2026-10-19; /landing's own electrical scene 2026-10-22).
+
+landing.html is generated too, so edit tools/landing-base.html (never deployed) and re-run;
+the script only adds /landing's motion scene beside its reviews and leaves everything else as-is.
 
 The service pages must keep exactly the format of Jakov's /landing page (the marketing
 course's structure), so instead of hand-copying it, this script takes landing.html and
@@ -12,7 +16,7 @@ from pathlib import Path
 
 PREVIEW = False  # launched 2026-10-19 (True = noindex)
 ROOT = Path(__file__).resolve().parent.parent
-BASE = (ROOT / 'landing.html').read_text()
+BASE = (ROOT / 'tools' / 'landing-base.html').read_text()
 
 # ── small inline icons (60x60, line style to match the site's icon set) ──────────
 def icon(body):
@@ -363,6 +367,95 @@ SMOKE_CSS = '''
             .k-smoke path, .k-ring { animation: none; opacity: 0; }
         }'''
 
+# ── GENERAL ELECTRICAL scene (/landing, 2026-10-22) — same house; state A = new switchboard powers the
+#    house room by room, state B (.state-b) = night: garden uplights, security flood and EV charger on ──
+ELEC_SCENE = """<defs>
+                          <linearGradient id="eDown" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe0a0" stop-opacity=".7"/><stop offset="1" stop-color="#ffe0a0" stop-opacity="0"/></linearGradient>
+                          <linearGradient id="eUp" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ffe0a0" stop-opacity=".75"/><stop offset="1" stop-color="#ffe0a0" stop-opacity="0"/></linearGradient>
+                          <linearGradient id="eFlood" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eaf6ff" stop-opacity=".6"/><stop offset="1" stop-color="#eaf6ff" stop-opacity="0"/></linearGradient>
+                        </defs>
+                        <g transform="translate(272 44) scale(.82)">
+                          <g class="e-night">
+                            <g class="e-stars"><circle cx="250" cy="40" r="1.6"/><circle cx="330" cy="88" r="1.2"/><circle cx="410" cy="30" r="1.8"/><circle cx="470" cy="110" r="1.2"/><circle cx="170" cy="120" r="1.3"/><circle cx="380" cy="140" r="1.1"/><circle cx="610" cy="150" r="1.3"/></g>
+                            <path class="e-moon" d="M556 52 a28 28 0 1 0 22 46 a22 22 0 1 1 -22 -46z"/>
+                          </g>
+                          <line class="mh-line mh-faint mh-draw d1" pathLength="1" x1="50" y1="440" x2="640" y2="440"/>
+                          <polyline class="mh-line mh-house mh-draw d1" pathLength="1" points="200,440 200,280 530,280 530,440"/>
+                          <polyline class="mh-line mh-house mh-draw d2" pathLength="1" points="176,288 365,170 554,288"/>
+                          <!-- rooms: two windows and the front door, lit room by room -->
+                          <rect class="e-win" style="--d:4.7s" x="242" y="322" width="62" height="50" rx="2"/>
+                          <rect class="e-win" style="--d:5.3s" x="426" y="322" width="62" height="50" rx="2"/>
+                          <rect class="e-win" style="--d:5.0s" x="342" y="366" width="46" height="72" rx="2"/>
+                          <rect class="mh-line mh-house mh-draw d3" pathLength="1" x="240" y="320" width="66" height="54" rx="3"/>
+                          <rect class="mh-line mh-house mh-draw d3" pathLength="1" x="424" y="320" width="66" height="54" rx="3"/>
+                          <rect class="mh-line mh-house mh-draw d3" pathLength="1" x="340" y="364" width="50" height="76" rx="3"/>
+                          <!-- downlights and kitchen pendants under the ceiling line -->
+                          <g class="e-light" style="--d:4.7s"><path d="M273 300 L256 344 L290 344 Z" fill="url(#eDown)"/><circle cx="273" cy="299" r="3" class="e-bulb"/></g>
+                          <g class="e-light" style="--d:5.3s"><path d="M457 300 L440 344 L474 344 Z" fill="url(#eDown)"/><circle cx="457" cy="299" r="3" class="e-bulb"/></g>
+                          <g class="e-light" style="--d:5.0s"><line x1="352" y1="296" x2="352" y2="328" class="e-cord"/><line x1="378" y1="296" x2="378" y2="328" class="e-cord"/><path d="M352 328 L340 352 L364 352 Z M378 328 L366 352 L390 352 Z" fill="url(#eDown)"/><circle cx="352" cy="330" r="4" class="e-bulb"/><circle cx="378" cy="330" r="4" class="e-bulb"/></g>
+                          <!-- new switchboard on the side wall, his shield on the door -->
+                          <rect class="mh-line mh-cyan mh-draw d4" pathLength="1" x="122" y="312" width="62" height="86" rx="5"/>
+                          <svg x="128" y="317" width="16" height="16" viewBox="0 0 216 216"><image href="images/logo-nav.png" width="1056" height="216"/></svg>
+                          <circle class="e-led" cx="174" cy="324" r="3.4"/>
+                          <rect class="e-slot" x="132" y="342" width="9" height="20" rx="2"/><rect class="e-tog" style="--d:3.0s" x="133.5" y="352" width="6" height="8" rx="1.5"/>
+                          <rect class="e-slot" x="145" y="342" width="9" height="20" rx="2"/><rect class="e-tog" style="--d:3.25s" x="146.5" y="352" width="6" height="8" rx="1.5"/>
+                          <rect class="e-slot" x="158" y="342" width="9" height="20" rx="2"/><rect class="e-tog" style="--d:3.5s" x="159.5" y="352" width="6" height="8" rx="1.5"/>
+                          <rect class="e-slot" x="171" y="342" width="9" height="20" rx="2"/><rect class="e-tog" style="--d:3.75s" x="172.5" y="352" width="6" height="8" rx="1.5"/>
+                          <line class="mh-line mh-cyan mh-draw d4" pathLength="1" x1="132" y1="374" x2="174" y2="374"/>
+                          <line class="mh-line mh-cyan mh-draw d4" pathLength="1" x1="132" y1="384" x2="160" y2="384"/>
+                          <line class="mh-line mh-faint mh-draw d4" pathLength="1" x1="153" y1="398" x2="153" y2="440"/>
+                          <!-- circuits: board → ceiling → every room -->
+                          <path class="mh-wire" d="M184 334 L214 334 L214 296 L516 296"/>
+                          <path class="mh-current" pathLength="1" d="M184 334 L214 334 L214 296 L516 296"/>
+                          <!-- night: garden tree with uplights, security flood on the corner, EV charger -->
+                          <line class="mh-line mh-house mh-draw d3" pathLength="1" x1="606" y1="440" x2="606" y2="404"/>
+                          <circle class="mh-line mh-house mh-draw d3" pathLength="1" cx="606" cy="384" r="22"/>
+                          <g class="e-out" style="--o:.2s"><path d="M598 440 L580 364 L606 364 Z" fill="url(#eUp)"/><path d="M614 440 L606 364 L632 364 Z" fill="url(#eUp)"/><circle cx="598" cy="439" r="2.6" class="e-bulb"/><circle cx="614" cy="439" r="2.6" class="e-bulb"/></g>
+                          <rect class="mh-line mh-house mh-draw d3" pathLength="1" x="522" y="290" width="16" height="9" rx="2"/>
+                          <g class="e-out" style="--o:.6s"><path d="M536 298 L580 440 L534 440 Z" fill="url(#eFlood)"/></g>
+                          <rect class="mh-line mh-cyan mh-draw d4" pathLength="1" x="62" y="392" width="22" height="48" rx="4"/>
+                          <path class="mh-line mh-cyan mh-draw d4" pathLength="1" d="M84 404 q16 4 14 22 l0 14"/>
+                          <rect class="e-chg" x="67" y="400" width="12" height="20" rx="2"/>
+                          <path class="e-bolt" d="M74 403 l-4 8 h4 l-2 7 l6 -9 h-4 l2 -6z"/>
+                          <g class="e-out" style="--o:1s"><circle class="e-pulse" cx="73" cy="410" r="12"/><circle class="e-pulse p2" cx="73" cy="410" r="12"/></g>
+                        </g>"""
+
+ELEC_CSS = """
+        /* General electrical scene — state A = switchboard powers the house, state B (.state-b) = night outdoor + EV */
+        .e-tog { fill: #3a4468; transform: translateY(0); animation: eFlip .35s var(--d) cubic-bezier(.3,1.6,.5,1) forwards; }
+        .e-slot { fill: #141a33; stroke: rgba(255,255,255,.35); stroke-width: 1; opacity: 0; animation: mhFade .5s 2.6s forwards; }
+        .e-led { fill: #1c2440; animation: eLed .3s 4s forwards, eBlink 2s 4.3s infinite; }
+        .e-win { fill: rgba(255,214,130,0); filter: drop-shadow(0 0 10px rgba(255,200,110,.55)); animation: eLights 1s var(--d) forwards; }
+        .e-light { opacity: 0; animation: mhFade .8s var(--d) forwards; }
+        .e-bulb { fill: #ffe0a0; } .e-cord { stroke: rgba(255,255,255,.6); stroke-width: 1.4; }
+        .e-night { opacity: 0; transition: opacity 2s; } .elec-slot.state-b .e-night { opacity: 1; }
+        .e-stars circle { fill: #fff; opacity: .8; } .e-stars circle:nth-child(3n) { opacity: .45; }
+        .e-moon { fill: #e9ecf5; transform: translateY(30px); transform-box: fill-box; transition: transform 2.4s .6s; }
+        .elec-slot.state-b .e-moon { transform: none; }
+        .e-out { opacity: 0; transition: opacity 1.2s; } .elec-slot.state-b .e-out { opacity: 1; transition-delay: var(--o); }
+        .e-chg { fill: rgba(60,224,160,.12); transition: fill 1.2s; } .elec-slot.state-b .e-chg { animation: eCharge 3s 1s infinite; }
+        .e-bolt { fill: rgba(255,255,255,.45); transition: fill 1s; } .elec-slot.state-b .e-bolt { fill: #3ce0a0; }
+        .e-pulse { fill: none; stroke: #3ce0a0; stroke-width: 1.6; transform-box: fill-box; transform-origin: center; animation: ePulse 2s ease-out infinite; }
+        .e-pulse.p2 { animation-delay: 1s; }
+        @keyframes eFlip { 0% { transform: translateY(0); fill: #3a4468; } 100% { transform: translateY(-8px); fill: var(--blue); } }
+        @keyframes eLed { to { fill: #3ce0a0; } }
+        @keyframes eBlink { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+        @keyframes eLights { to { fill: rgba(255,214,130,.95); } }
+        @keyframes eCharge { 0% { fill: rgba(60,224,160,.12); } 70%, 100% { fill: rgba(60,224,160,.85); } }
+        @keyframes ePulse { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(2.6); opacity: 0; } }
+        @media (prefers-reduced-motion: reduce) {
+            .e-tog { transform: translateY(-8px); fill: var(--blue); } .e-slot, .e-light { opacity: 1; }
+            .e-led { fill: #3ce0a0; } .e-win { fill: rgba(255,214,130,.95); }
+        }"""
+
+LANDING_SCENE = dict(
+    slug='elec', label='ELECTRICAL',
+    aria='Animated Powerluxe logo, then a new switchboard powering a house room by room, and at night the garden lights, security light and EV charger switching on',
+    cap_main='<b>Inside</b>New switchboard in. Every circuit tested, every room lit.',
+    cap_alt='<b>Outside</b>Garden, security and EV charging, wired safe.',
+)
+
+
 # Shared page-level CSS (inline icons in the existing icon slots)
 EXTRA_CSS = '''
         /* Reviews: motion scene beside a one-at-a-time review slider */
@@ -514,8 +607,35 @@ PAGES = [
 def sub_once(pattern, repl, text):
     new, n = re.subn(pattern, lambda m: repl, text, count=1, flags=re.S)
     if n != 1:
-        raise SystemExit(f'pattern not found in landing.html: {pattern[:70]}')
+        raise SystemExit(f'pattern not found in landing-base.html: {pattern[:70]}')
     return new
+
+
+def add_scene(h, p, scene_svg, scene_css):
+    """Motion scene beside the reviews, one-at-a-time review slider, and the shared script."""
+    h = sub_once(r'(<link rel="stylesheet" href="css/styles.css">)', '<link rel="stylesheet" href="css/styles.css">\n    <link rel="stylesheet" href="css/motion-hero.css">', h)
+    h = sub_once(r'\n    </style>\n</head>', EXTRA_CSS + scene_css + '\n    </style>\n</head>', h)
+    h = sub_once(r'<section class="testimonials">\s*<div class="container">',
+                 '<section class="testimonials">\n        <div class="container reviews-grid">\n            '
+                 + slot(p, scene_svg, p['cap_main'], p['cap_alt']) + '\n            <div class="reviews-col">', h)
+    h = re.sub(r'(<div class="swiper testimonials-swiper">.*?<div class="swiper-pagination"></div>\s*</div>)',
+               lambda m: m.group(1) + '\n            </div>', h, count=1, flags=re.S)
+    h = sub_once(r"\n                breakpoints: \{\n                    768: \{ slidesPerView: 2 \},\n                    1024: \{ slidesPerView: 3 \},\n                \},", '', h)
+    h = sub_once(r'(<script src="https://link.msgsndr.com/js/form_embed.js"></script>)',
+                 '<script src="js/motion-hero.js"></script>\n    <script src="https://link.msgsndr.com/js/form_embed.js"></script>', h)
+    return h
+
+
+def stamp_and_write(h, name):
+    header = '<!-- GENERATED by tools/build-service-pages.py from tools/landing-base.html — edit those, not this file. -->\n'
+    h = h.replace('<!DOCTYPE html>\n', '<!DOCTYPE html>\n' + header, 1)
+    (ROOT / name).write_text(h)
+    print('wrote', name)
+
+
+def build_landing():
+    """/landing: the base page unchanged except for its general-electrical scene beside the reviews."""
+    stamp_and_write(add_scene(BASE, LANDING_SCENE, ELEC_SCENE, ELEC_CSS), 'landing.html')
 
 
 def build(p):
@@ -525,19 +645,10 @@ def build(p):
     if PREVIEW:
         h = sub_once(r'(<meta name="viewport"[^>]*>)', '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <meta name="robots" content="noindex, nofollow">', h)
     h = sub_once(r'<meta name="description" content=".*?">', f'<meta name="description" content="{p["desc"]}">', h)
-    h = sub_once(r'(<link rel="stylesheet" href="css/styles.css">)', '<link rel="stylesheet" href="css/styles.css">\n    <link rel="stylesheet" href="css/motion-hero.css">', h)
-    h = sub_once(r'\n    </style>\n</head>', EXTRA_CSS + p['css'] + '\n    </style>\n</head>', h)
 
     h = sub_once(r'<h1>Expert Electrical Repairs For Every Home &amp; Business</h1>', f'<h1>{p["h1"]}</h1>', h)
     h = sub_once(r'<div class="hero-video-wrapper">.*?</video>\s*</div>', video_box(p), h)
 
-    # Reviews: animation on the left, review slider (one at a time) on the right
-    h = sub_once(r'<section class="testimonials">\s*<div class="container">',
-                 '<section class="testimonials">\n        <div class="container reviews-grid">\n            '
-                 + slot(p, p['scene'], p['cap_main'], p['cap_alt']) + '\n            <div class="reviews-col">', h)
-    h = re.sub(r'(<div class="swiper testimonials-swiper">.*?<div class="swiper-pagination"></div>\s*</div>)',
-               lambda m: m.group(1) + '\n            </div>', h, count=1, flags=re.S)
-    h = sub_once(r"\n                breakpoints: \{\n                    768: \{ slidesPerView: 2 \},\n                    1024: \{ slidesPerView: 3 \},\n                \},", '', h)
     h = sub_once(r'<h3>Get Your Free Quote Today</h3>', f'<h3>{p["form_h3"]}</h3>', h)
 
     feats = ''.join(f'''
@@ -583,14 +694,13 @@ def build(p):
                      + '\n                </div>\n                <div class="swiper-button-prev">', h)
     h = sub_once(r'<h2>Want Reliable Electrical Services\?</h2>', f'<h2>{p["banner"]}</h2>', h)
 
-    h = sub_once(r'(<script src="https://link.msgsndr.com/js/form_embed.js"></script>)',
-                 '<script src="js/motion-hero.js"></script>\n    <script src="https://link.msgsndr.com/js/form_embed.js"></script>', h)
+    h = add_scene(h, p, p['scene'], p['css'])
+    stamp_and_write(h, p['file'])
 
-    header = (f'<!-- GENERATED by tools/build-service-pages.py from landing.html — edit the script, not this file. -->\n')
-    h = h.replace('<!DOCTYPE html>\n', '<!DOCTYPE html>\n' + header, 1)
-    (ROOT / p['file']).write_text(h)
-    print('wrote', p['file'])
 
 
 for page in PAGES:
     build(page)
+
+
+build_landing()
