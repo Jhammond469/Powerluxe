@@ -33,7 +33,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // Portfolio slider
-new Swiper('.portfolio-swiper', {
+if (typeof Swiper !== 'undefined' && document.querySelector('.portfolio-swiper')) new Swiper('.portfolio-swiper', {
     slidesPerView: 1,
     spaceBetween: 24,
     loop: true,
@@ -59,6 +59,7 @@ function escapeHtml(str) {
 }
 
 function initTestimonialsSwiper() {
+    if (typeof Swiper === 'undefined') return;
     new Swiper('.testimonials-swiper', {
         slidesPerView: 1,
         spaceBetween: 32,

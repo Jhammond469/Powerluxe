@@ -571,7 +571,8 @@ ul { list-style: none; }
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr;
     gap: 60px;
-    padding: 72px 0 48px;
+    padding-top: 72px;
+    padding-bottom: 48px;
 }
 .footer-logo { height: 48px; width: auto; margin-bottom: 24px; }
 .social-links { display: flex; gap: 16px; }
