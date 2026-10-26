@@ -60,6 +60,8 @@ function escapeHtml(str) {
 
 function initTestimonialsSwiper() {
     if (typeof Swiper === 'undefined') return;
+    // Beside the motion scene (homepage, since 26 Oct) the column is narrow: one review at a time, like /landing.
+    const besideScene = !!document.querySelector('.reviews-col .testimonials-swiper');
     new Swiper('.testimonials-swiper', {
         slidesPerView: 1,
         spaceBetween: 32,
@@ -69,7 +71,7 @@ function initTestimonialsSwiper() {
             el: '.testimonials-swiper .swiper-pagination',
             clickable: true,
         },
-        breakpoints: {
+        breakpoints: besideScene ? {} : {
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
         },
