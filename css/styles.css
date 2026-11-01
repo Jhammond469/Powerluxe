@@ -656,3 +656,10 @@ ul { list-style: none; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
     .portfolio-swiper .swiper-slide img { height: 280px; }
 }
+
+/* Areas we serve (1 Nov 2026): a full-width row above the copyright, same look as the footer columns. */
+.footer-areas { padding-top: 32px; padding-bottom: 32px; border-top: 1px solid rgba(255,255,255,0.08); }
+.footer-areas h4 { color: var(--white); font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+.footer-areas-lead { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-bottom: 14px; }
+.footer-areas ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.footer-areas li { font-size: 0.875rem; color: rgba(255,255,255,0.7); }
