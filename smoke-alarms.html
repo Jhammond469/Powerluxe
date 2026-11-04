@@ -163,10 +163,6 @@
                 <h1>Smoke Alarms, Installed to Queensland's New Standard</h1>
                 <!-- Jakov's smoke video goes here. When it arrives: compress to 720p (see CLAUDE.md),
                      save as images/smoke-alarms-video.mp4, set VIDEO_SRC (+ VIDEO_POSTER) in tools/build-service-pages.py, re-run. -->
-                <div class="hero-video-wrapper video-pending">
-                    <img src="images/logo-nav.png" alt="" width="1056" height="216">
-                    <span>Video coming soon</span>
-                </div>
                 <div class="hero-rating">
                     <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                     <span>5-Star Rated on Google</span>
@@ -565,7 +561,11 @@
                 const reviews = Array.isArray(data) ? data : (data && data.reviews) || [];
                 if (reviews.length === 0) throw new Error('No reviews');
                 const wrapper = document.querySelector('.testimonials-swiper .swiper-wrapper');
-                wrapper.innerHTML = reviews.map(r => `
+                // Service pages can pin real Google reviews about that service first (data-pinned, set by
+                // tools/build-service-pages.py). Keep them, and don't show the same reviewer twice.
+                const pinned = [...wrapper.querySelectorAll('[data-pinned]')];
+                const pinnedBy = new Set(pinned.map(el => el.dataset.pinned));
+                wrapper.innerHTML = pinned.map(el => el.outerHTML).join('') + reviews.filter(r => !pinnedBy.has(r.author)).map(r => `
                     <div class="swiper-slide">
                         <div class="testimonial-card">
                             <div class="stars">${'&#9733;'.repeat(r.rating)}</div>

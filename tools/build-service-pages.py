@@ -11,6 +11,7 @@ swaps only the service-specific blocks. Re-run it after any change to landing.ht
 
     python3 tools/build-service-pages.py
 """
+import html
 import re
 from pathlib import Path
 
@@ -84,12 +85,10 @@ def video_box(page):
                         <source src="{page["VIDEO_SRC"]}" type="video/mp4">
                     </video>
                 </div>'''
+    # No placeholder box: a live "Video coming soon" hurts trust (Josh approved removing it, 4 Nov 2026).
+    # The hero shows the headline and rating only until the real video arrives.
     return f'''<!-- Jakov's {page["slug"]} video goes here. When it arrives: compress to 720p (see CLAUDE.md),
-                     save as {page["video"]}, set VIDEO_SRC (+ VIDEO_POSTER) in tools/build-service-pages.py, re-run. -->
-                <div class="hero-video-wrapper video-pending">
-                    <img src="images/logo-nav.png" alt="" width="1056" height="216">
-                    <span>Video coming soon</span>
-                </div>'''
+                     save as {page["video"]}, set VIDEO_SRC (+ VIDEO_POSTER) in tools/build-service-pages.py, re-run. -->'''
 
 
 # ── SOLAR scene (from motion-hero-sample/solar-v2.html, which Josh signed off) ──
@@ -497,6 +496,12 @@ PAGES = [
         cap_main='<b>By day</b>The sun runs your home and charges the battery.',
         cap_alt='<b>After dark</b>The battery keeps the lights on.',
         form_h3='Get Your Free Solar Quote',
+        # Real Google reviews about solar, WORD FOR WORD from Powerluxe's Google listing (read 4 Nov 2026, both 5 stars).
+        # Shown first on /solar; the live feed adds the rest after them. Never edit the wording or add made-up ones.
+        pinned_reviews=[
+            ('Stefanie', 'Very happy with our solar battery installation by Powerluxe. The team was professional, reliable and did a fantastic job from start to finish. The whole process was smooth, and the quality of work was excellent. Highly recommend Powerluxe Electrical for anyone looking for a solar battery installation!'),
+            ('Mark Lineham', 'Highly recommend Powerluxe Electrical! Professional, reliable and easy to deal with from start to finish. Great communication, turned up on time and completed all work to a very high standard. Extremely knowledgeable across electrical, air conditioning and solar, with great attention to detail and quality workmanship. Everything was left clean and tidy, and nothing was too much trouble. Would definitely use Powerluxe Electrical again and recommend them to anyone needing a trustworthy electrician!'),
+        ],
         features=[
             ('sun', 'Licensed Solar Installer', 'Solar Licence S2194786 — your system is designed and installed by licensed electricians.'),
             ('panel', 'Quality Panels &amp; Inverters', 'Industry-certified components chosen for long-term performance, not the cheapest price.'),
@@ -693,6 +698,18 @@ def build(p):
                      '<div class="swiper portfolio-swiper">\n                <div class="swiper-wrapper">' + ''.join(slide(x) for x in p['portfolio'])
                      + '\n                </div>\n                <div class="swiper-button-prev">', h)
     h = sub_once(r'<h2>Want Reliable Electrical Services\?</h2>', f'<h2>{p["banner"]}</h2>', h)
+
+    if p.get('pinned_reviews'):
+        pins = ''.join(f'''
+                    <div class="swiper-slide" data-pinned="{html.escape(a)}">
+                        <div class="testimonial-card">
+                            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                            <p>"{html.escape(t, quote=False)}"</p>
+                            <span class="author">— {html.escape(a)}, Google Review</span>
+                        </div>
+                    </div>''' for a, t in p['pinned_reviews'])
+        h = sub_once(r'(<div class="swiper testimonials-swiper">\s*<div class="swiper-wrapper">)',
+                     '<div class="swiper testimonials-swiper">\n                <div class="swiper-wrapper">' + pins, h)
 
     h = add_scene(h, p, p['scene'], p['css'])
     stamp_and_write(h, p['file'])
