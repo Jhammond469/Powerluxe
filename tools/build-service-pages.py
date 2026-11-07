@@ -500,7 +500,7 @@ PAGES = [
         # Shown first on /solar; the live feed adds the rest after them. Never edit the wording or add made-up ones.
         pinned_reviews=[
             ('Stefanie', 'Very happy with our solar battery installation by Powerluxe. The team was professional, reliable and did a fantastic job from start to finish. The whole process was smooth, and the quality of work was excellent. Highly recommend Powerluxe Electrical for anyone looking for a solar battery installation!'),
-            # 'Mark Lineham' removed 5 Nov 2026: name matches Powerluxe staff, hidden until Jakov confirms he's a customer.
+            ('Mark Lineham', 'Highly recommend Powerluxe Electrical! Professional, reliable and easy to deal with from start to finish. Great communication, turned up on time and completed all work to a very high standard. Extremely knowledgeable across electrical, air conditioning and solar, with great attention to detail and quality workmanship. Everything was left clean and tidy, and nothing was too much trouble. Would definitely use Powerluxe Electrical again and recommend them to anyone needing a trustworthy electrician!'),  # confirmed customer (Josh, 7 Nov 2026)
         ],
         features=[
             ('sun', 'Licensed Solar Installer', 'Solar Licence S2194786 — your system is designed and installed by licensed electricians.'),
